@@ -1,4 +1,4 @@
-# gender-bias detector
+# Gender Bias Detector
 
 Real-time Javascipt gender bias detector. The research behind this can be found [here](http://gender-decoder.katmatfield.com/static/documents/Gaucher-Friesen-Kay-JPSP-Gendered-Wording-in-Job-ads.pdf)
 
