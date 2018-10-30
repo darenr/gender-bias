@@ -7,7 +7,7 @@ function tokenize(input) {
 function bias(phrase) {
 
   var tokens = tokenize(phrase),
-    coding_score = 0,
+    coding = 0,
     feminine_words = [],
     masculine_words = [],
     feminine_word_count = 0,
@@ -20,8 +20,6 @@ function bias(phrase) {
 
     if (feminine_coded_words.indexOf(obj) == -1 && masculine_coded_words.indexOf(obj) == -1)
       continue;
-
-    console.log("processing: " + obj + ", f.length: " + feminine_words.length + ", m.length: " + masculine_words.length);
 
     if (feminine_coded_words.indexOf(obj) > -1) {
       feminine_word_count++;
@@ -48,12 +46,13 @@ function bias(phrase) {
     } else {
       coding = "masculine-coded";
     }
-
-    return {
-      verdict: coding,
-      coding_score: coding_score,
-      feminine_words: feminine_words,
-      masculine_words: masculine_words
-    };
   }
+
+  return {
+    verdict: coding,
+    coding_score: coding_score,
+    feminine_words: feminine_words,
+    masculine_words: masculine_words
+  };
+
 }
