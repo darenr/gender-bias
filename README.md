@@ -1,5 +1,7 @@
 # Gender Bias Detector
 
+[DEMO](https://darenr.github.io/gender-bias/)
+
 Real-time Javascipt gender bias detector. The research behind this can be found [here](http://gender-decoder.katmatfield.com/static/documents/Gaucher-Friesen-Kay-JPSP-Gendered-Wording-in-Job-ads.pdf)
 
 The words listed hre have come from research into language that reflects the gender 'codeing' as masculine and feminine, 
