@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+  <style>
+    body {
+      padding-top: 70px;
+      padding-bottom: 30px;
+    }
+
+    .theme-dropdown .dropdown-menu {
+      position: static;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .theme-showcase>p>.btn {
+      margin: 5px 0;
+    }
+
+    .theme-showcase .navbar .container {
+      width: auto;
+    }
+
+    textarea {
+      border-radius: 4px;
+      width: 100%;
+      height: 180px;
+      min-height: 180px;
+      max-height: 180px;
+      padding: 10px;
+    }
+
+  </style>
+
+  <title>Gender Bias Detector</title>
+</head>
+
+<body role="document">
+
+  <!-- Fixed navbar -->
+  <div class="container">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Gender Bias Detector</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="http://gender-decoder.katmatfield.com/static/documents/Gaucher-Friesen-Kay-JPSP-Gendered-Wording-in-Job-ads.pdf" target="_blank">Evidence That Gendered Wording Exists and
+              Sustains Gender Inequality</a></li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </div>
+
+  <div class="container main">
+
+    <p>
+      Gendered wording (i.e., masculine- and feminine-themed
+      words, such as those associated with gender stereotypes) may be an unacknowledged,
+      institutional-level mechanism of inequality gender maintenance. This real-time Detector
+      will alert you to language that contains an inherent gender bias. The text is not sent
+      to a server, everything happens in the privacy of your browser.
+    </p>
+
+    <h3>Enter some text below for real-time gender bias analysis:</h3>
+    <textarea id="txt"></textarea>
+    <h3>Verdict:</h3>
+    <pre id="result"></pre>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted">The original list of
+        gender-coded words from the research paper written by Danielle Gaucher,
+        Justin Friesen, and Aaron C. Kay: Evidence That Gendered Wording in Job
+        Advertisements Exists and Sustains Gender Inequality (Journal of Personality
+        and Social Psychology, July 2011, Vol 101(1), p109-28).</p>
+    </div>
+  </footer>
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- English Gendered words -->
+  <script src="wordlist_en.js"></script>
+
+  <!-- Algorithm -->
+  <script src="bias.js"></script>
+
+  <script>
+    $(document).ready(function() {
+
+      $('#txt').focus();
+      $('#txt').bind('input propertychange', function() {
+        $('#result').html(JSON.stringify(bias($('#txt').val()), undefined, 2));
+      });
+    });
+  </script>
+</body>
+</html>
