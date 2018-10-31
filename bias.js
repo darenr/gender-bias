@@ -4,6 +4,16 @@ function tokenize(input) {
     .split(' '), $.trim);
 }
 
+function getMatches(string, regex, index) {
+  index || (index = 1);
+  var matches = [];
+  var match;
+  while (match = regex.exec(string)) {
+    matches.push(match[index]);
+  }
+  return matches;
+}
+
 function bias(phrase) {
 
   var tokens = tokenize(phrase),
@@ -13,40 +23,35 @@ function bias(phrase) {
     feminine_word_count = 0,
     masculine_word_count = 0;
 
-  // Iterate over tokens
-  var len = tokens.length;
-  while (len--) {
-    var obj = tokens[len];
+  var doc = tokens.join(" ");
 
-    if (feminine_coded_words.indexOf(obj) == -1 && masculine_coded_words.indexOf(obj) == -1)
-      continue;
+  feminine_words = getMatches(doc, regex_feminine_coded_words, 1);
+  masculine_words = getMatches(doc, regex_masculine_coded_words, 1);
 
-    if (feminine_coded_words.indexOf(obj) > -1) {
-      feminine_word_count++;
-      feminine_words.push(obj);
-    } else if (masculine_coded_words.indexOf(obj) > -1) {
-      masculine_word_count++;
-      masculine_words.push(obj);
-    }
+  feminine_word_count = feminine_words.length;
+  masculine_word_count = masculine_words.length;
 
-    var coding_score = feminine_word_count - masculine_word_count;
+  console.log("feminine_words: " + feminine_words);
+  console.log("masculine_words: " + masculine_words);
 
-    if (coding_score === 0) {
-      if (feminine_word_count) {
-        coding = "neutral";
-      } else {
-        coding = "empty";
-      }
-    } else if (coding_score > 3) {
-      coding = "strongly feminine-coded";
-    } else if (coding_score > 0) {
-      coding = "feminine-coded";
-    } else if (coding_score < -3) {
-      coding = "strongly masculine-coded";
+  var coding_score = feminine_word_count - masculine_word_count;
+
+  if (coding_score === 0) {
+    if (feminine_word_count) {
+      coding = "neutral";
     } else {
-      coding = "masculine-coded";
+      coding = "empty";
     }
+  } else if (coding_score > 3) {
+    coding = "strongly feminine-coded";
+  } else if (coding_score > 0) {
+    coding = "feminine-coded";
+  } else if (coding_score < -3) {
+    coding = "strongly masculine-coded";
+  } else {
+    coding = "masculine-coded";
   }
+
 
   return {
     verdict: coding,
