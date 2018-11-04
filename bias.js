@@ -31,16 +31,13 @@ function bias(phrase) {
   feminine_word_count = feminine_words.length;
   masculine_word_count = masculine_words.length;
 
-  console.log("feminine_words: " + feminine_words);
-  console.log("masculine_words: " + masculine_words);
-
   var coding_score = feminine_word_count - masculine_word_count;
 
   if (coding_score === 0) {
     if (feminine_word_count) {
       coding = "neutral";
     } else {
-      coding = "empty";
+      coding = "empty, no gendered words found";
     }
   } else if (coding_score > 3) {
     coding = "strongly feminine-coded";
