@@ -122,7 +122,20 @@
   <script src="bias.js"></script>
 
   <script>
+
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+
     $(document).ready(function() {
+
+      var q = getUrlParameter("q");
+      if(q) {
+        $('#txt').val(q);
+      }
 
       $('#txt').focus();
       $('#txt').bind('input propertychange', function() {
