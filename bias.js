@@ -9,7 +9,7 @@ function getMatches(string, regex, index) {
   var matches = [];
   var match;
   while (match = regex.exec(string)) {
-    matches.push(match[index]);
+    matches.push(match[index].trim());
   }
   return matches;
 }
@@ -23,6 +23,9 @@ function bias(phrase) {
     feminine_word_count = 0,
     masculine_word_count = 0;
 
+  /*
+   create a cleaned up document in which to perform word stem searches.
+  */
   var doc = tokens.join(" ");
 
   feminine_words = getMatches(doc, regex_feminine_coded_words, 1);
