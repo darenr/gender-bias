@@ -134,7 +134,7 @@
 
       var q = getUrlParameter("q");
       if(q) {
-        $('#txt').val(q);
+        $('#txt').val(q).trigger('propertychange');
       }
 
       $('#txt').focus();
