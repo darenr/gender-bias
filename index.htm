@@ -132,15 +132,16 @@
 
     $(document).ready(function() {
 
+      $('#txt').focus();
+      $('#txt').bind('input propertychange', function() {
+        $('#result').html(JSON.stringify(bias($('#txt').val()), undefined, 2));
+      });
+
       var q = getUrlParameter("q");
       if(q) {
         $('#txt').val(q).trigger('propertychange');
       }
 
-      $('#txt').focus();
-      $('#txt').bind('input propertychange', function() {
-        $('#result').html(JSON.stringify(bias($('#txt').val()), undefined, 2));
-      });
     });
   </script>
 
